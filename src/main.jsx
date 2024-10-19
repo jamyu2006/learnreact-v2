@@ -7,6 +7,8 @@ import ErrorPage from "./error-page";
 import Contact, {loader as contactLoader,} from "./routes/contact";
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import EditContact, {action as editAction} from "./routes/edit";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -19,6 +21,12 @@ const router = createBrowserRouter([
         path: "contacts/:contactID",
         element: <Contact />,
         loader: contactLoader,
+      },
+      {
+        path: "contacts/:contactId/edit",
+        element: <EditContact />,
+        loader: contactLoader,
+        action: editAction,
       },
     ],
   },
