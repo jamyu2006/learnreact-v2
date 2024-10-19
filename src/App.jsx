@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import './App.css'
 
+import AiX from './pages/ai_x/ai_x.jsx'; // Import the new page component
+
 function Square({value, onSquareClick}) {
   return <button className="square" onClick={onSquareClick}>{value}</button>;
 }
