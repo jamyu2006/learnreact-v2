@@ -5,17 +5,17 @@ export function getContacts() {
 }
 
 export function getContact(contactID) {
-    console.log("get " + contactID);
+    //console.log("get " + contactID);
     return contactsList[contactID]; // Return the current contact
   }
 
 export function createContact() {
     const newContact = {
-        first: "Your",
-        last: "Name",
-        avatar: "https://robohash.org/you.png?size=200x200",
-        twitter: "your_handle",
-        notes: "Some notes",
+        first: "",
+        last: "",
+        avatar: "",
+        twitter: "",
+        notes: "",
         favorite: true,
         id: contactsList.length, 
     };
@@ -46,7 +46,12 @@ export function updateContact(contactID, updates){
   // Iterate over the keys in the updates object
   Object.keys(updates).forEach((key) => {
     if (key in contact) { // Check if the key exists in the contact
-      contact[key] = updates[key]; // Update the contact property
+        const newValue = updates[key];
+
+        // Check if the new value is not empty (i.e., not null, undefined, or an empty string)
+        if (newValue !== null && newValue !== undefined && newValue !== ''){
+            contact[key] = updates[key]; // Update the contact property
+        }
     }
   });
 }

@@ -2,18 +2,18 @@ import { Form, useLoaderData } from "react-router-dom";
 import { getContact } from "./contacts";
 
 export async function loader({ params }) {
-  console.log(params); //array with contactID = 0
-  console.log(params.contactID); //undefined
+  //console.log(params); //array with contactID = 0
+  //console.log(params.contactID); //undefined
   const contact = await getContact(params.contactID);
   return { contact };
 }
 
 export default function Contact() {
   const { contact } = useLoaderData();
-  console.log(contact); //undefined
-  console.log(contact.contactId); //errors
-  console.log(contact.first); //errors
-  console.log(contact.last); //errors
+  //console.log(contact); //undefined
+  //console.log(contact.contactId); //errors
+  //console.log(contact.first); //errors
+  //console.log(contact.last); //errors
 
   return (
     <div id="contact">
