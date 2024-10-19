@@ -1,5 +1,6 @@
 import { Form, useLoaderData } from "react-router-dom";
 import { getContact } from "../contacts";
+import { useState } from 'react';
 
 export async function loader({ params }) {
   //console.log(params); //array with contactID = 0
@@ -10,10 +11,8 @@ export async function loader({ params }) {
 
 export default function Contact() {
   const { contact } = useLoaderData();
-  //console.log(contact); //undefined
-  //console.log(contact.contactId); //errors
-  //console.log(contact.first); //errors
-  //console.log(contact.last); //errors
+
+  const [showModal, setShowModal] = useState(false);
 
   return (
     <div id="contact">
@@ -56,21 +55,28 @@ export default function Contact() {
           <Form action="edit">
             <button type="submit">Edit</button>
           </Form>
-          <Form
-            method="post"
-            action="destroy"
-            onSubmit={(event) => {
-              if (
-                !confirm(
-                  "Please confirm you want to delete this record."
-                )
-              ) {
-                event.preventDefault();
-              }
-            }}
-          >
-            <button type="submit">Delete</button>
-          </Form>
+          <button onClick={() => {
+              setShowModal(true);
+            }}>Delete</button>
+
+          {showModal && (
+            <div className="modal">
+              <div className="modal-content">
+                <p>Are you sure you want to delete this contact?</p>
+                <Form
+                  id="delete-form"
+                  method="post"
+                  action="destroy"
+                  onSubmit={() => {setShowModal(false);}}
+                >
+                  <button type="submit">Yes</button>
+                </Form>
+                <button onClick={() => {
+                  setShowModal(false);
+                }}>No</button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

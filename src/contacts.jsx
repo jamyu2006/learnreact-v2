@@ -50,5 +50,5 @@ export function updateContact(contactID, updates) {
 }
 
 export function deleteContact(contactID){
-  
+  delete contactsList[contactID];
 }
