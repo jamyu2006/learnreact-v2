@@ -1,8 +1,23 @@
 let contactsList = {}; // Array to hold the contacts
 let nextindex = 0;
 
-export function getContacts() {
-  return contactsList; // Return the current list of contacts
+export function getContacts(query) {
+  if(query === undefined || query === "" || query === null){
+    return contactsList;
+  }
+
+  let tempContacts = {};
+
+  Object.entries(contactsList).forEach(([id, contact]) => {
+    if (
+      contact.first.slice(0, query.length).toLowerCase() === query.toLowerCase() ||
+      contact.last.slice(0, query.length).toLowerCase() === query.toLowerCase()
+    ) {
+      tempContacts[id] = contact; // Add the matching contact to tempContacts
+    }
+  });
+
+  return tempContacts; // Return the filtered list of contacts
 }
 
 export function getContact(contactID) {
